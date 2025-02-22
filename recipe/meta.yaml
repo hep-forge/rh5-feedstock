@@ -28,9 +28,11 @@ requirements:
 
   host:
     - root-plus
+    - hdf5
 
   run:
     - root-plus
+    - hdf5
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/hdf5"
