@@ -1,0 +1,44 @@
+{% set versions = {
+    "HEAD": "HEAD"
+} %}
+
+{% set version = environ.get('COMMIT_VERSION', None) %}
+{% set version = version or versions.keys()|first %}
+{% set version = version|string %}
+
+package:
+  name: {{ environ.get('ANACONDA_PACKAGE', "rh5")|string|lower }}
+  version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
+
+source:
+  git_url: "https://git.ligo.org/kagra/libraries-addons/root/hdf5"
+  git_rev: {{ version }}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }} # [linux]
+    - {{ compiler('c') }}   # [linux]
+    - {{ stdlib('c') }}
+
+    - clang
+    - cmake
+    - make
+
+    - cuda-nvcc
+
+  host:
+    - root-plus
+
+  run:
+    - root-plus
+
+about:
+  home: "https://git.ligo.org/kagra/libraries-addons/root/hdf5"
+  license: "GPL-3.0"
+  summary: "HDF5 Adapter for ROOT"
+  description: |
+    RH5 is a ROOT adapter for reading HDF5/H5 files
+
+extra:
+  recipe-maintainers:
+    - meiyasan
