@@ -1,5 +1,6 @@
 {% set versions = {
-    "HEAD": "HEAD"
+    "HEAD": "HEAD",
+    "0.1": "ae75e9878589fce9d71483d82724a60521c27cf5"
 } %}
 
 {% set version = environ.get('COMMIT_VERSION', None) %}
@@ -12,7 +13,7 @@ package:
 
 source:
   git_url: "https://git.ligo.org/kagra/libraries-addons/root/hdf5"
-  git_rev: {{ version }}
+  git_rev: "v{{ version }}"
 
 requirements:
   build:
